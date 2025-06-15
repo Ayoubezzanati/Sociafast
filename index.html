@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>SociaFast - خدمات سوشيال ميديا</title>
+  <style>
+    body { font-family: 'Arial', sans-serif; background: #f5f5f5; padding: 20px; }
+    form { background: #fff; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #1e40af; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 15px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">طلب خدمة</h2>
+  <form id="orderForm">
+    <label>نوع الخدمة:</label>
+    <select name="service">
+      <option>متابعين إنستغرام</option>
+      <option>مشاهدات تيك توك</option>
+      <option>مشاهدات لايف فيسبوك</option>
+      <option>إعجابات يوتيوب</option>
+    </select>
+
+    <label>رابط الحساب أو المنشور:</label>
+    <input type="url" name="link" required>
+
+    <label>الكمية المطلوبة:</label>
+    <input type="number" name="quantity" required>
+
+    <label>البريد الإلكتروني:</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">إرسال الطلب</button>
+  </form>
+
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = {
+        service: this.service.value,
+        link: this.link.value,
+        quantity: this.quantity.value,
+        email: this.email.value
+      };
+      fetch("https://script.google.com/macros/s/AKfycbwQkKAa2abmutWHTZVrrAAg7v6vGnR6u7RGs5v2n1J4yIr-9PulYEc6strouQG7IQ68_A/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+      }).then(res => alert("✅ تم إرسال الطلب بنجاح")).catch(err => alert("❌ حدث خطأ أثناء الإرسال"));
+    });
+  </script>
+</body>
+</html>
